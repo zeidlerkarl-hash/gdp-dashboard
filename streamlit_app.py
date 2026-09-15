@@ -6,7 +6,7 @@ st.title("Sparbuch vs. ETF Simulation")
 st.write("Vergleiche hier die historische und zufällige Wertentwicklung von einem sicheren Sparbuch und einem schwankenden ETF-Portfolio!")
 
 # Eingaben über Regler
-start_capital = st.slider("Startkapital in Euro", 100, 15000, 1000, step=100)
+start_capital = st.slider("Startkapital in Euro", 100, 10000, 1000, step=100)
 years = st.slider("Anlagedauer in Jahren", 5, 30, 15)
 
 # Feste Sparbuch-Rendite (z.B. 1.5%)
