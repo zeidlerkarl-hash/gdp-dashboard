@@ -1,2 +1,5 @@
+text 
+
 streamlit
-pandas
+numpy
+matplotlib
