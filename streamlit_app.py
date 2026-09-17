@@ -53,7 +53,7 @@ st.pyplot(fig)
 if years <= 5:
     st.warning("⚖️ **1–5 Jahre:** Kopf-an-Kopf-Rennen! Hier merkst du kaum einen Unterschied zum Sparbuch – manchmal bist du sogar kurz im Minus. Kurzfristig lohnt sich das Risiko kaum.")
 elif years <= 15:
-    st.info("📈 **5–15 Jahre:** Der ETF fängt an zu ziehen. Der Abstand zum Sparbuch wird Monat für Monat deutlicher.")
+    st.info("📈 **5–15 Jahre:** Der ETF steigt schneller an. Der Abstand zum Sparbuch wird Monat für Monat deutlicher.")
 else:
     st.success("🚀 **15+ Jahre (Die Rakete):** Schau dir diesen Anstieg an! Hier greift der Zinseszinseffekt voll – der ETF explodiert förmlich nach oben.")
 
