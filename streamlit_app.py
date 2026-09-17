@@ -2,8 +2,8 @@ import streamlit as st
 import numpy as np
 import matplotlib.pyplot as plt
 
-st.title("📈 ETF vs. Sparbuch")
-st.markdown("**Die magische Reise des Geldes: Vom Kopf-an-Kopf-Rennen zur Rakete!**")
+st.title("ETF vs. Sparbuch")
+st.markdown("**Die magische Reise des Geldes wie schlägt sich ein Etf gegenüber dem Sparbuch?**")
 
 # Eingaben über Regler
 start_capital = st.slider("Startkapital in Euro", 100, 15000, 3000, step=100)
