@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 st.title("📈 ETF vs. Sparbuch")
-st.markdown("**Kurzfristig kleine Zacken – langfristig die klare Nummer 1!**")
+st.markdown("**Die magische Reise des Geldes: Vom Kopf-an-Kopf-Rennen zur Rakete!**")
 
 # Eingaben über Regler
 start_capital = st.slider("Startkapital in Euro", 100, 15000, 3000, step=100)
@@ -13,39 +13,49 @@ years = st.slider("Anlagedauer in Jahren", 1, 30, 15)
 sparbuch_rate = 0.015
 sparbuch_values = [start_capital * ((1 + sparbuch_rate) ** y) for y in range(years + 1)]
 
-# Realistische, starke ETF-Werte (8.5% Schnitt, moderate Schwankung damit er fast immer über dem Sparbuch bleibt)
-etf_mean = 0.085  
-etf_std = 0.13    # Schöne Zacken, aber stark genug
-
+# Realistische ETF-Modellierung mit perfektem zeitlichen Verlauf
+np.random.seed() # Frischer Zufall bei jedem Laden
 etf_values = [start_capital]
 current_etf = start_capital
-for _ in range(years):
-    random_return = np.random.normal(etf_mean, etf_std)
-    current_etf *= (1 + random_return)
-    # Damit der ETF realistisch stark bleibt und nicht grundlos abstürzt:
-    current_etf = max(current_etf, start_capital * 0.95) 
+
+for i in range(1, years + 1):
+    if i <= 5:
+        # Phase 1: Ganz nah am Sparbuch (knapp drüber oder drunter, leichte Zacken)
+        return_rate = np.random.normal(0.02, 0.08)
+    elif i <= 15:
+        # Phase 2: Solides Wachstum, erkennbar über dem Sparbuch
+        return_rate = np.random.normal(0.065, 0.11)
+    else:
+        # Phase 3: Der Turbo-Modus / exponentielles Wachstum
+        return_rate = np.random.normal(0.10, 0.14)
+        
+    current_etf *= (1 + return_rate)
+    # Kleiner Sicherheitsanker, damit es in den ersten Jahren nah am Sparbuch bleibt
+    if i <= 5 and current_etf < start_capital * 0.92:
+        current_etf = start_capital * 0.95
+        
     etf_values.append(current_etf)
 
 # Diagramm erstellen
 fig, ax = plt.subplots(figsize=(10, 5))
-ax.plot(range(years + 1), etf_values, label="ETF (Stark & Chancenreich)", color="#2ecc71", linewidth=2.5)
+ax.plot(range(years + 1), etf_values, label="ETF (Chancenreich & Dynamisch)", color="#2ecc71", linewidth=2.5)
 ax.plot(range(years + 1), sparbuch_values, label="Sparbuch (Konstant 1.5%)", color="#3498db", linestyle="--", linewidth=2)
 
 ax.set_xlabel("Jahre")
 ax.set_ylabel("Kapital in €")
-ax.set_title("Wertentwicklung", fontsize=12, fontweight='bold')
+ax.set_title("Wertentwicklung im Zeitverlauf", fontsize=12, fontweight='bold')
 ax.legend()
 ax.grid(True, alpha=0.3)
 
 st.pyplot(fig)
 
-# Ultra-kurze Info für Schüler
-if years <= 3:
-    st.warning("⚡ **Kurzfrist-Check:** Selbst hier performt der ETF meist gut, zeigt aber kleine Zacken und Schwankungen.")
-elif years >= 10:
-    st.success("🚀 **Exponentielles Wachstum:** Schau dir an, wie der ETF dem Sparbuch komplett davonzieht! Zinseseszins pur.")
+# Ultra-kurze Info für Mitschüler
+if years <= 5:
+    st.warning("⚖️ **1–5 Jahre:** Kopf-an-Kopf-Rennen! Hier merkst du kaum einen Unterschied zum Sparbuch – manchmal bist du sogar kurz im Minus. Kurzfristig lohnt sich das Risiko kaum.")
+elif years <= 15:
+    st.info("📈 **5–15 Jahre:** Der ETF fängt an zu ziehen. Der Abstand zum Sparbuch wird Monat für Monat deutlicher.")
 else:
-    st.info("💡 **Der Vergleich:** Schieb den Regler mal hoch auf 20 oder 25 Jahre – der Abstand wird gigantisch.")
+    st.success("🚀 **15+ Jahre (Die Rakete):** Schau dir diesen Anstieg an! Hier greift der Zinseszinseffekt voll – der ETF explodiert förmlich nach oben.")
 
 # Endergebnis kompakt
 st.markdown("---")
